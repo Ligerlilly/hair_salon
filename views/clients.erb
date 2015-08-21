@@ -1,9 +1,9 @@
 <h2>Clients</h2>
 
 <% if @clients.any? %>
-   <ul>
+   <ul class='list'>
      <% @clients.each do |client| %>
-       <li><a href="/clients/<%= client.id %>"><%= client.name %></a></li>
+       <li><a href="/clients/<%= client.id %>"><h4><%= client.name %></h4></a></li>
      <% end %>
    </ul>
 <% else %>

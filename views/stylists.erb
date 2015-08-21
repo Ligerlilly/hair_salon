@@ -1,9 +1,14 @@
 <h2>Stylists</h2>
 
 <% if @stylists.any? %>
-   <ul>
+   <ul class='list'>
      <% @stylists.each do |stylist| %>
-       <li><a href="/stylists/<%= stylist.id %>"><%= stylist.name %></a></li>
+       <li><a href="/stylists/<%= stylist.id %>"><h4><%= stylist.name %></h4></a></li>
+       <ul>
+         <% stylist.clients.each do |client| %>
+           <li>Client: <%= client.name %></li>
+         <% end %>
+       </ul>
      <% end %>
    </ul>
 <% else %>

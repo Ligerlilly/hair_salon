@@ -23,6 +23,17 @@ post '/clients' do
 	redirect :clients
 end
 
+get '/clients/:id' do
+	@client = Client.find(params['id'].to_i)
+	erb :client
+end
+
+delete '/clients/:id' do
+	@client = Client.find(params['id'].to_i)
+	@client.destroy
+	redirect :clients
+end
+
 get '/stylists' do
 	@stylists = Stylist.all
 	erb :stylists
@@ -35,11 +46,21 @@ post '/stylists' do
 end
 
 get '/stylists/:id' do
+	@clients = Client.all
 	@stylist = Stylist.find(params['id'].to_i)
 	erb :stylist
 end
 
-get '/clients/:id' do
-	@client = Client.find(params['id'].to_i)
-	erb :client
+patch "/stylists/:id" do
+	@stylist = Stylist.find(params['id'].to_i)
+	@stylist.update({name: params['name']})
+	@client = Client.find(params['client_id'].to_i)
+	@client.update({name: @client.name, stylist_id: @stylist.id, client_id: params['client_id'].to_i})
+	redirect :stylists
+end
+
+delete '/stylists/:id' do
+	@stylist = Stylist.find(params['id'].to_i)
+	@stylist.destroy
+	redirect :stylists
 end

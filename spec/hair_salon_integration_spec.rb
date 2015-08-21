@@ -6,7 +6,7 @@ set(:show_exceptions, false)
 describe 'hair_salon path', { type: :feature } do
   it 'should be able to add a stylist' do
     visit '/'
-    click_link 'Stylists'
+    click_link("Stylists", :match => :first)
     fill_in 'name', with: 'Gordon'
     click_button 'Submit'
     expect(page).to have_content "Gordon"
@@ -14,7 +14,7 @@ describe 'hair_salon path', { type: :feature } do
 
   it 'should be able to add a client' do
     visit '/'
-    click_link 'Client'
+    click_link("Client", :match => :first)
     fill_in 'name', with: 'Maureen'
     click_button 'Submit'
     expect(page).to have_content "Maureen"
@@ -34,5 +34,14 @@ describe 'hair_salon path', { type: :feature } do
     visit '/stylists'
     click_link "Mark"
     expect(page).to have_content 'Stylist: Mark'
+  end
+
+  it 'should be able to delete a stylist' do
+    @stylist = Stylist.new({ name: 'George', id: nil })
+    @stylist.save
+    visit '/stylists'
+    click_link 'George'
+    click_button 'Delete'
+    expect(page).not_to have_content 'George'
   end
 end

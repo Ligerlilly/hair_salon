@@ -38,9 +38,10 @@ class Stylist
   end
 
   def update(attributes)
-    @name = attributes[:name]
-
-    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{self.id};");
+    if attributes[:name] != ''
+      @name = attributes[:name]
+      DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{self.id};");
+    end
   end
 
   def destroy

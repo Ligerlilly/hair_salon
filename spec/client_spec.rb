@@ -52,7 +52,7 @@ describe Client do
   describe '#update' do
     it 'should be able to update the name and stylist_id of a client' do
       @client.save
-      @client.update({ name: 'Emily', stylist_id: 1 })
+      @client.update({ name: 'Emily', stylist_id: 1, client_id: @client.id })
       expect(@client.name).to eq 'Emily'
       expect(@client.stylist_id).to eq 1
     end
