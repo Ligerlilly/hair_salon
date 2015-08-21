@@ -54,6 +54,17 @@ describe 'hair_salon path', { type: :feature } do
     expect(page).not_to have_content 'George'
   end
 
+  it 'should be able to update a stylist name' do
+    @stylist = Stylist.new({ name: 'George', id: nil })
+    @stylist.save
+    visit '/stylists'
+    click_link 'George'
+    fill_in 'name', with: 'Garrett'
+    click_button 'Update'
+    expect(page).not_to have_content 'George'
+    expect(page).to have_content 'Garrett'
+  end
+
   it 'should be able to add a client to a stylist' do
     @client = Client.new({ name: 'Maria', stylist_id: nil, id: nil })
     @client.save

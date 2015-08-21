@@ -54,8 +54,10 @@ end
 patch "/stylists/:id" do
 	@stylist = Stylist.find(params['id'].to_i)
 	@stylist.update({name: params['name']})
-	@client = Client.find(params['client_id'].to_i)
-	@client.update({name: @client.name, stylist_id: @stylist.id, client_id: params['client_id'].to_i})
+	if params['client_id']
+		@client = Client.find(params['client_id'].to_i)
+		@client.update({name: @client.name, stylist_id: @stylist.id, client_id: params['client_id'].to_i})
+	end
 	redirect :stylists
 end
 
