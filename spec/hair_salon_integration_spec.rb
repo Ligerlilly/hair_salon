@@ -53,4 +53,18 @@ describe 'hair_salon path', { type: :feature } do
     click_button 'Delete'
     expect(page).not_to have_content 'George'
   end
+
+  it 'should be able to add a client to a stylist' do
+    @client = Client.new({ name: 'Maria', stylist_id: nil, id: nil })
+    @client.save
+    @stylist = Stylist.new({ name: 'George', id: nil })
+    @stylist.save
+    @client2 = Client.new({ name: 'Liz', stylist_id: nil, id: nil })
+    @client2.save
+    visit '/stylists'
+    click_link 'George'
+    select "Liz", :from => "client_id"
+    click_button "Update"
+    expect(page).to have_content 'Liz'
+  end
 end
