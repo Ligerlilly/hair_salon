@@ -1,0 +1,21 @@
+<h2>Stylists</h2>
+
+<% if @stylists.any? %>
+   <ul>
+     <% @stylists.each do |stylist| %>
+       <li><%= stylist.name %></li>
+     <% end %>
+   </ul>
+<% else %>
+  <p>
+    There are no stylists add one.
+  </p>
+<% end %>
+
+<form action="stylists" method="post">
+  <div class="form-group">
+    <label for="name">Enter name of stylist:</label>
+    <input type="text" name="name" class='form-control'>
+  </div>
+  <button class'btn btn-primary'>Submit</button>
+</form>
