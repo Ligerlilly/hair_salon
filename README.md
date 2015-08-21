@@ -2,7 +2,14 @@
 ##	Contributors:
 * Jason Lane
 
+# Description
+User can create stylists and clients. User can add clients to a stylist.
+
+
 # DB schema
+id serial PRIMARY KEY
+name varchar
+stylist_id int
 
 #stylists
 id | name
