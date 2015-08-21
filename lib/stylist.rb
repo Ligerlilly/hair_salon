@@ -47,5 +47,17 @@ class Stylist
     DB.exec("DELETE FROM stylists WHERE id = #{self.id};")
   end
 
+  def clients
+    clients =[]
+    returned_clients = DB.exec("SELECT * FROM clients WHERE stylist_id = #{self.id};")
+    returned_clients.each do |client|
+      name = client['name']
+      id = client['id'].to_i
+      stylist_id = client['stylist_id'].to_i
+      clients.push(Client.new({ name: name, id: id, stylist_id: stylist_id }))
+    end
+    clients
+  end
+
 
 end

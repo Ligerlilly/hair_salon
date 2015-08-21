@@ -59,4 +59,16 @@ describe Stylist do
     end
   end
 
+  describe '#clients' do
+    it 'should return all the clients associated with stylist' do
+      @stylist.save
+      client1 = Client.new(id: nil, name: 'Lisa', stylist_id: @stylist.id)
+      client2 = Client.new(id: nil, name: 'Emily', stylist_id: @stylist.id)
+      client1.save
+      client2.save
+      expect(@stylist.clients).to eq [client1, client2]
+
+    end
+  end
+
 end
