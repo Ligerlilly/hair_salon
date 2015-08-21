@@ -20,11 +20,19 @@ describe 'hair_salon path', { type: :feature } do
     expect(page).to have_content "Maureen"
   end
 
-  it 'should be able to go to an individual stylist page' do
+  it 'should be able to go to an individual client page' do
     @client = Client.new({ name: 'Katy', id: nil, stylist_id: nil })
     @client.save
     visit '/clients'
     click_link "Katy"
     expect(page).to have_content 'Client: Katy'
+  end
+
+  it 'should be able to go to an individual stylist page' do
+    @client = Stylist.new({ name: 'Mark', id: nil })
+    @client.save
+    visit '/stylists'
+    click_link "Mark"
+    expect(page).to have_content 'Stylist: Mark'
   end
 end

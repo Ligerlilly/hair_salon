@@ -35,6 +35,7 @@ post '/stylists' do
 end
 
 get '/stylists/:id' do
+	@stylist = Stylist.find(params['id'].to_i)
 	erb :stylist
 end
 
