@@ -13,7 +13,14 @@ get '/'  do
 end
 
 get '/clients' do
+	@clients = Client.all
   erb :clients
+end
+
+post '/clients' do
+	@client = Client.new({ name: params['name'], id: nil, stylist_id: nil })
+	@client.save
+	redirect :clients
 end
 
 get '/stylists' do

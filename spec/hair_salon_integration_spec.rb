@@ -11,4 +11,12 @@ describe 'hair_salon path', { type: :feature } do
     click_button 'Submit'
     expect(page).to have_content "Gordon"
   end
+
+  it 'should be able to add a client' do
+    visit '/'
+    click_link 'Client'
+    fill_in 'name', with: 'Maureen'
+    click_button 'Submit'
+    expect(page).to have_content "Maureen"
+  end
 end
