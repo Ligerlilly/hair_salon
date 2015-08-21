@@ -27,4 +27,18 @@ describe Client do
       expect(@client.stylist_id).to eq 0
     end
   end
+
+  describe '#save' do
+    it 'should save client in database' do
+      @client.save
+      expect(Client.all).to eq [@client]
+    end
+  end
+
+  describe '#==' do
+    it 'should return true if all attributes are equal' do
+      client2 = Client.new({ id: nil, name: 'Lisa', stylist_id: nil })
+      expect(@client).to eq client2
+    end
+  end
 end

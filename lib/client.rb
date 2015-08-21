@@ -13,9 +13,18 @@ class Client
     returned_clients.each do |client|
       name = client['name']
       id = client['id'].to_i
-      stylist_id = client['stylist_id'].to_id
+      stylist_id = client['stylist_id'].to_i
       clients.push(Client.new({ id: id, name: name, stylist_id: stylist_id }))
     end
     clients
+  end
+
+  def save
+    result = DB.exec("INSERT INTO clients (name, stylist_id) VALUES ('#{self.name}', #{self.stylist_id}) RETURNING id;")
+    @id = result.first.fetch('id').to_i
+  end
+
+  def ==(client)
+    self.id == client.id && self.name == client.name && self.stylist_id == client.stylist_id
   end
 end
