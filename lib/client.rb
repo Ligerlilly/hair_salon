@@ -41,7 +41,6 @@ class Client
   end
 
   def update(attributes)
-
     if attributes[:stylist_id]
       @stylist_id = attributes[:stylist_id].to_i
       DB.exec("UPDATE clients SET stylist_id = #{@stylist_id};")
@@ -49,7 +48,9 @@ class Client
 
     @name = attributes[:name]
     DB.exec("UPDATE clients SET name = '#{name}';")
+  end
 
-
+  def destroy
+    DB.exec("DELETE FROM clients WHERE id = #{self.id};")
   end
 end
