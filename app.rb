@@ -28,11 +28,19 @@ get '/clients/:id' do
 	erb :client
 end
 
+patch '/clients/:id' do
+	@client = Client.find(params['id'].to_i)
+	@client.update({name: params['name'], client_id: params['id'].to_i})
+	redirect :clients
+end
+
 delete '/clients/:id' do
 	@client = Client.find(params['id'].to_i)
 	@client.destroy
 	redirect :clients
 end
+
+
 
 get '/stylists' do
 	@stylists = Stylist.all
