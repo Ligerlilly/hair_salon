@@ -8,7 +8,7 @@ class Stylist
 
   def self.all
     stylists = []
-    returned_stylists = DB.exec('SELECT * FROM stylists')
+    returned_stylists = DB.exec('SELECT * FROM stylists;')
     returned_stylists.each do |stylist|
       name = stylist['name']
       id = stylist['id'].to_i
@@ -18,7 +18,7 @@ class Stylist
   end
 
   def save
-    result = DB.exec("INSERT INTO stylists (name) VALUES ('#{self.name}') RETURNING id")
+    result = DB.exec("INSERT INTO stylists (name) VALUES ('#{self.name}') RETURNING id;")
     @id = result.first.fetch('id').to_i
   end
 
@@ -28,7 +28,7 @@ class Stylist
 
   def self.find(stylist_id)
     found_stylist = nil
-    returned_stylist = DB.exec("SELECT * FROM stylists WHERE id = #{stylist_id}")
+    returned_stylist = DB.exec("SELECT * FROM stylists WHERE id = #{stylist_id};")
     returned_stylist.each do |stylist|
       id = stylist['id']
       name = stylist['name']
@@ -40,8 +40,12 @@ class Stylist
   def update(attributes)
     @name = attributes[:name]
 
-    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{self.id}");
-
-
+    DB.exec("UPDATE stylists SET name = '#{@name}' WHERE id = #{self.id};");
   end
+
+  def destroy
+    DB.exec("DELETE FROM stylists WHERE id = #{self.id};")
+  end
+
+
 end

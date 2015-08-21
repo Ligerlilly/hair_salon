@@ -51,4 +51,12 @@ describe Stylist do
     end
   end
 
+  describe '#destroy' do
+    it 'should remove object from database' do
+      @stylist.save
+      @stylist.destroy
+      expect(Stylist.all).to eq []
+    end
+  end
+
 end
