@@ -39,5 +39,6 @@ get '/stylists/:id' do
 end
 
 get '/clients/:id' do
+	@client = Client.find(params['id'].to_i)
 	erb :client
 end
