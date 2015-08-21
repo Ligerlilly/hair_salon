@@ -44,4 +44,13 @@ describe 'hair_salon path', { type: :feature } do
     click_button 'Delete'
     expect(page).not_to have_content 'George'
   end
+
+  it 'should be able to delete a client' do
+    @client = Client.new({ name: 'Maria', stylist_id: nil, id: nil })
+    @client.save
+    visit '/clients'
+    click_link 'Maria'
+    click_button 'Delete'
+    expect(page).not_to have_content 'George'
+  end
 end
