@@ -41,4 +41,28 @@ describe Client do
       expect(@client).to eq client2
     end
   end
+
+  describe '.find' do
+    it 'returns a client based on id' do
+      @client.save
+      expect(Client.find(@client.id)).to eq @client
+    end
+  end
+
+  describe '#update' do
+    it 'should be able to update the name of a client' do
+      @client.save
+      @client.update({ name: 'Emily', stylist_id: 1 })
+      expect(@client.name).to eq 'Emily'
+      expect(@client.stylist_id).to eq 1
+    end
+  end
+
+  describe '#destroy' do
+    it 'should remove object from database' do
+      @client.save
+      @client.destroy
+      expect(Client.all).to eq []
+    end
+  end
 end
